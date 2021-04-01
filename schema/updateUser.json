@@ -1,0 +1,51 @@
+{
+    "title": "An object value",
+    "required": [
+        "firstname",
+        "lastname",
+        "username",
+        "id"
+    ],
+    "properties": {
+        "firstname": {
+            "title": "Firstname value",
+            "default": "",
+            "pattern": "^(.*)$",
+            "minLength": 3,
+            "minLength": 30,
+            "examples": [
+                "tobok"
+            ],
+            "$id": "#/properties/firstname",
+            "type": "string"
+        },
+        "lastname": {
+            "title": "lastname value",
+            "default": "",
+            "pattern": "^(.*)$",
+            "minLength": 3,
+            "minLength": 30,
+            "examples": [
+                "sitanggang"
+            ],
+            "$id": "#/properties/lastname",
+            "type": "string"
+        },
+        "username": {
+            "title": "Username value",
+            "default": "",
+            "pattern": "^(.*)$",
+            "minLength": 3,
+            "minLength": 30,
+            "examples": [
+                "mrbontor"
+            ],
+            "$id": "#/properties/username",
+            "type": "string"
+        }
+    },
+    "$id": "http://example.org/updateUser.json#",
+    "type": "object",
+    "definitions": {},
+    "$schema": "http://json-schema.org/draft-07/schema#"
+}
