@@ -29,14 +29,18 @@ if (config.use_env_variable) {
         }
     }));
 }
-// let model = require(path.join(__dirname, file))(sequelize, Sequelize);
-// db.UserTrx = require(path.join(__dirname, '/user_trx'))(sequelize, Sequelize);
 
-// Object.keys(db).forEach(modelName => {
-//     if (db[modelName].associate) {
-//         db[modelName].associate(db);
-//     }
-// });
+// let model = require(path.join(__dirname, file))(sequelize, Sequelize);
+db.User = require(path.join(__dirname, '/users'))(sequelize, Sequelize);
+db.UB = require(path.join(__dirname, '/users_balance'))(sequelize, Sequelize);
+db.IB = require(path.join(__dirname, '/inves_balance'))(sequelize, Sequelize);
+db.Transaction = require(path.join(__dirname, '/transactions'))(sequelize, Sequelize);
+
+Object.keys(db).forEach(modelName => {
+    if (db[modelName].associate) {
+        db[modelName].associate(db);
+    }
+});
 
 sequelize.sync()
 .then(result => {

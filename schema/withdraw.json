@@ -1,0 +1,34 @@
+{
+    "title": "An object value",
+    "required": [
+        "user_id",
+        "type",
+        "amount_rupiah"
+    ],
+    "properties": {
+        "type": {
+            "title": "The Type Schema",
+            "enum": ["topup", "withdraw"],
+            "pattern": "^(.*)$",
+            "examples": [
+                "topup"
+            ],
+            "$id": "#/properties/type",
+            "type": "string"
+        },
+        "amount_rupiah": {
+            "title": "Balance value",
+            "pattern": "^(\\d+)$",
+            "minLength": 1,
+            "examples": [
+                50000
+            ],
+            "$id": "#/properties/amount_rupiah",
+            "type": "string"
+        }
+    },
+    "$id": "http://example.org/withdraw.json#",
+    "type": "object",
+    "definitions": {},
+    "$schema": "http://json-schema.org/draft-07/schema#"
+}
