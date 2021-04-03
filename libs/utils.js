@@ -64,10 +64,14 @@ function handleErrorValidation(array) {
     );
 }
 
+function isNumeric(num){
+    return !isNaN(num)
+}
 
 module.exports = {
     formatDateStandard,
     formatRupiah,
     formatMontYear,
-    handleErrorValidation
+    handleErrorValidation,
+    isNumeric
 }

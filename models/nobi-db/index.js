@@ -35,7 +35,7 @@ db.User = require(path.join(__dirname, '/users'))(sequelize, Sequelize);
 db.UB = require(path.join(__dirname, '/users_balance'))(sequelize, Sequelize);
 db.IB = require(path.join(__dirname, '/inves_balance'))(sequelize, Sequelize);
 db.Transaction = require(path.join(__dirname, '/transactions'))(sequelize, Sequelize);
-
+db.sequelize = sequelize
 Object.keys(db).forEach(modelName => {
     if (db[modelName].associate) {
         db[modelName].associate(db);

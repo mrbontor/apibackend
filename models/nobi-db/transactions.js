@@ -1,3 +1,5 @@
+'use strict';
+const util = require('../../libs/utils');
 module.exports = (sequelize, DataTypes) => {
     const Transaction = sequelize.define('Transaction', {
         id: {
@@ -14,7 +16,7 @@ module.exports = (sequelize, DataTypes) => {
             allowNull: false,
             defaultValue: 0
         },
-        assets: {
+        assets_temp: {
             type: DataTypes.FLOAT(20, 4),
             allowNull: false,
             defaultValue: 0
@@ -24,8 +26,17 @@ module.exports = (sequelize, DataTypes) => {
             allowNull: false,
             defaultValue: 0
         },
-        created_at: DataTypes.STRING(20),
-        updated_at: DataTypes.STRING(20)
+        ib_temp: {
+            type: DataTypes.FLOAT(20, 2),
+            allowNull: false,
+            defaultValue: 0
+        },
+        created_at: {
+            type: DataTypes.DATE,
+            get(){
+                return util.formatDateStandard(this.getDataValue('created_at'), true)
+            }
+        }
     }, {
         tableName: 'transactions',
         timestamps: false,

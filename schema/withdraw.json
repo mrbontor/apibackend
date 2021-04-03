@@ -8,10 +8,10 @@
     "properties": {
         "type": {
             "title": "The Type Schema",
-            "enum": ["topup", "withdraw"],
+            "enum": ["kredit", "debit"],
             "pattern": "^(.*)$",
             "examples": [
-                "topup"
+                "kredit"
             ],
             "$id": "#/properties/type",
             "type": "string"
@@ -24,7 +24,7 @@
                 50000
             ],
             "$id": "#/properties/amount_rupiah",
-            "type": "string"
+            "type": "number"
         }
     },
     "$id": "http://example.org/withdraw.json#",
