@@ -115,24 +115,30 @@ async function topUpBalance(req, res) {
             return res.status(BAD_REQUEST).send(respons)
         }
 
-        let balanceUser = 0
-        let unitUser = 0
-        let ibUser = 0
+        let balanceUser = 0, unitUser = 0, ibUser = 0;
         let infoUser = await db.getInfoUserBalance(_request.user_id)
 
         balanceUser = (infoUser === null) ? 0 : infoUser["UB.amount"]
         unitUser = (infoUser === null) ? 0 : infoUser["UB.assets"]
 
+        //get total Balance
+        ibUser = nobi.getIB(unitUser, getCurrentNAB[0].nab_amount)
+        console.log('u', unitUser);
+
+        //user's unit temporary
         let unitUserTemp = nobi.getUnit(_request.amount_rupiah, getCurrentNAB[0].nab_amount)
-        logging.debug(`[User'sUnit] >>>> ${unitUserTemp}`)
-        ibUser = unitUserTemp * getCurrentNAB[0].nab_amount
+        // calculate total unit
+        let finalUnit = unitUser + unitUserTemp
+        logging.debug(`[User'sUnit] >>>> POST ${_request.amount_rupiah} = ${unitUser} + ${unitUserTemp}`)
+        //total user's balance
+        let finalIB = nobi.getIB(finalUnit, getCurrentNAB[0].nab_amount)
+
 
         let now = util.formatDateStandard(new Date(), true)
         let dataUserBalance = {
             user_id: _request.user_id,
-            amount: balanceUser + _request.amount_rupiah,
-            assets: unitUserTemp,
-            ib: nobi.roundDown2(ibUser),
+            amount: finalIB,
+            assets: nobi.roundDown4(finalUnit),
             created_at: now
         }
 
@@ -140,9 +146,9 @@ async function topUpBalance(req, res) {
             user_id: _request.user_id,
             type: _request.type,
             amount: _request.amount_rupiah,
-            assets_temp: unitUserTemp,
+            assets_temp: nobi.roundDown4(finalUnit),
             nab_temp: getCurrentNAB[0].nab_amount,
-            ib_temp: nobi.roundDown2(ibUser),
+            ib_temp: finalIB,
             created_at: now
         }
 
@@ -157,9 +163,8 @@ async function topUpBalance(req, res) {
             message: 'Success',
             data: {
                 topup: _request.amount_rupiah,
-                unit: nobi.roundDown4(unitUserTemp),
-                balance: nobi.roundDown2(balanceUser),
-
+                unit: nobi.roundDown4(finalUnit),
+                balance: finalIB
             }
         }
         res.status(SUCCESS).send(respons)
@@ -203,14 +208,18 @@ async function withdrawBalance(req, res) {
         balanceUser = (infoUser === null) ? 0 : infoUser["UB.amount"]
         unitUser = (infoUser === null) ? 0 : infoUser["UB.assets"]
 
-        let unitUserTemp = nobi.getUnit(_request.amount_rupiah, getCurrentNAB[0].nab_amount)
-        logging.debug(`[User'sUnit] >>>> ${unitUserTemp}`)
-        let finalUnit = unitUser - unitUserTemp
-        ibUser = nobi.getIB(finalUnit, getCurrentNAB[0].nab_amount)
-        console.log(ibUser);
+        //get total Balance
+        ibUser = nobi.getIB(unitUser, getCurrentNAB[0].nab_amount)
+        console.log('u', unitUser);
 
-        console.log(unitUserTemp);
-        console.log(finalUnit);
+        //user's unit temporary
+        let unitUserTemp = nobi.getUnit(_request.amount_rupiah, getCurrentNAB[0].nab_amount)
+        // calculate total unit
+        let finalUnit = unitUser - unitUserTemp
+        logging.debug(`[User'sUnit] >>>> POST ${_request.amount_rupiah} = ${unitUser} - ${unitUserTemp}`)
+        //total user's balance
+        let finalIB = nobi.getIB(finalUnit, getCurrentNAB[0].nab_amount)
+
         if (_request.amount_rupiah > ibUser ) {
             respons.message = 'Insuficient issue'
             return res.status(BAD_REQUEST).send(respons);
@@ -221,7 +230,7 @@ async function withdrawBalance(req, res) {
             user_id: _request.user_id,
             amount: balanceUser - _request.amount_rupiah,
             assets: nobi.roundDown4(finalUnit),
-            ib: ibUser,
+            ib: finalIB,
             created_at: now
         }
 
@@ -229,9 +238,9 @@ async function withdrawBalance(req, res) {
             user_id: _request.user_id,
             type: _request.type,
             amount: _request.amount_rupiah,
-            assets_temp: unitUserTemp,
+            assets_temp: nobi.roundDown4(finalUnit),
             nab_temp: getCurrentNAB[0].nab_amount,
-            ib_temp: nobi.getIB(unitUser, getCurrentNAB[0].nab_amount),
+            ib_temp: finalIB,
             created_at: now
         }
 
@@ -246,9 +255,8 @@ async function withdrawBalance(req, res) {
             message: 'Success',
             data: {
                 topup: _request.amount_rupiah,
-                unit: nobi.roundDown4(unitUserTemp),
-                balance: nobi.roundDown2(balanceUser),
-
+                unit: nobi.roundDown4(finalUnit),
+                balance: finalIB
             }
         }
         res.status(SUCCESS).send(respons)
