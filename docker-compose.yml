@@ -1,0 +1,14 @@
+version: '3'
+services:
+    app:
+        build: .
+        container_name: api-nobi
+        restart: unless-stopped
+        ports:
+            - "2021:2021"
+        networks:
+            - host
+networks:
+    host:
+        name: mynetwork
+        external: true
