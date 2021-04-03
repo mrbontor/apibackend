@@ -1,0 +1,272 @@
+{
+	"info": {
+		"_postman_id": "b75b279a-570e-46b7-b354-e5ba3713ece1",
+		"name": "NOBI",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "transactions",
+			"item": [
+				{
+					"name": "updateTotalBalance",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"current_balance\": 11000\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:2021/api/v1/ib/updateTotalBalance",
+							"host": [
+								"localhost"
+							],
+							"port": "2021",
+							"path": [
+								"api",
+								"v1",
+								"ib",
+								"updateTotalBalance"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "TopUp",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"user_id\": 1,\r\n    \"amount_rupiah\": 5000\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:2021/api/v1/ib/topup",
+							"host": [
+								"localhost"
+							],
+							"port": "2021",
+							"path": [
+								"api",
+								"v1",
+								"ib",
+								"topup"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "withdraw",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"user_id\": 1,\r\n    \"amount_rupiah\": 6000\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:2021/api/v1/ib/withdraw",
+							"host": [
+								"localhost"
+							],
+							"port": "2021",
+							"path": [
+								"api",
+								"v1",
+								"ib",
+								"withdraw"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getListIB",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:2021/api/v1/ib/listNAB",
+							"host": [
+								"localhost"
+							],
+							"port": "2021",
+							"path": [
+								"api",
+								"v1",
+								"ib",
+								"listNAB"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "list Member",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:2021/api/v1/ib/member",
+							"host": [
+								"localhost"
+							],
+							"port": "2021",
+							"path": [
+								"api",
+								"v1",
+								"ib",
+								"member"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "Add User",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"firstname\": \"sitanggang\",\r\n    \"lastname\": \"tobok\",\r\n    \"username\": \"user\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:2021/api/v1/user/add",
+							"host": [
+								"localhost"
+							],
+							"port": "2021",
+							"path": [
+								"api",
+								"v1",
+								"user",
+								"add"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List Users",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"firstname\": \"tobok\",\r\n    \"lastname\": \"sitangang\",\r\n    \"username\": \"mrbontor\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:2021/api/v1/user/list",
+							"host": [
+								"localhost"
+							],
+							"port": "2021",
+							"path": [
+								"api",
+								"v1",
+								"user",
+								"list"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "find user by ID",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"firstname\": \"tobok\",\r\n    \"lastname\": \"sitangang\",\r\n    \"username\": \"mrbontor\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:2021/api/v1/user/find/1",
+							"host": [
+								"localhost"
+							],
+							"port": "2021",
+							"path": [
+								"api",
+								"v1",
+								"user",
+								"find",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
