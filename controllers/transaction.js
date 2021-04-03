@@ -133,7 +133,6 @@ async function topUpBalance(req, res) {
         //total user's balance
         let finalIB = nobi.getIB(finalUnit, getCurrentNAB[0].nab_amount)
 
-
         let now = util.formatDateStandard(new Date(), true)
         let dataUserBalance = {
             user_id: _request.user_id,
@@ -293,24 +292,6 @@ async function listBalance(req, res) {
         logging.debug(`[listBalance]   >>>>> ${e.stack}`)
         res.status(BAD_REQUEST).send(respons)
     }
-}
-
-async function isRequestValidated(request, type) {
-    let result = {}
-    let valid
-    switch (type) {
-        case 'topup':
-            valid = ajv.validate(topUp, request);
-            break;
-        default:
-            valid = ajv.validate(withdraw, request)
-    }
-    logging.debug(`[ValidateRequest] >>>> ${JSON.stringify(ajv.errors)}`)
-
-    if (!valid) {
-        result = util.handleErrorValidation(ajv.errors);
-    }
-    return Promise.resolve(result);
 }
 
 async function isRequestValidated(request, type) {

@@ -68,6 +68,7 @@ default = 1
     by this config, you can use multiple database in on service.
     If you wanna add new database , follow the format models in `/models/yourDatabase`
 
+    the schema database put in `schema_database.png` and dump file in `nobi.sql`
 
 ### Dockerfile
 
@@ -215,6 +216,7 @@ const ACCESS_FORBIDDEN  = 403 //not used for now
 const NOT_FOUND         = 404
 const INTERNAL_ERROR    = 500
 ```
+
 [RESPONSE]:
 
 ```json
@@ -224,3 +226,15 @@ const INTERNAL_ERROR    = 500
     "data": Array or Object
 }
 ```
+
+for endpoint list member, this uri use datatable function
+
+example url:
+
+    /api/v1/ib/member default size = 20
+
+    /api/v1/ib/member?page=1&size=5
+
+    /api/v1/ib/member?size=5: using default value for page
+
+    /api/v1/ib/member?id=user_id_member&page=1&size=3: pagination & filter by id containing `user_id_member`

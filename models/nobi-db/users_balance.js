@@ -34,12 +34,6 @@ module.exports = (sequelize, DataTypes) => {
             get(){
                 return util.formatDateStandard(this.getDataValue('created_at'), true)
             }
-        },
-        updated_at: {
-            type: DataTypes.DATE,
-            get(){
-                return util.formatDateStandard(this.getDataValue('updated_at'), true)
-            }
         }
     }, {
         tableName: 'users_balance',
