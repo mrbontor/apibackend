@@ -1,10 +1,10 @@
 {
-  "name": "NOBI Investment Backend Service",
+  "name": "apibackend",
   "version": "1.0.1",
-  "description": "",
+  "description": "NOBI Investment Backend Service",
   "main": "index.js",
   "scripts": {
-     "start": "node index.js",
+    "start": "node index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
